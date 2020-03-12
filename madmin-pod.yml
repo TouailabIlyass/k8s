@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+        name: madmin-pod
+        labels:
+                app: madmin-pod
+spec:
+        containers:
+                - image: phpmyadmin/phpmyadmin:latest
+                  name: madmin 
+                  ports:
+                   - containerPort: 80
+                  env:
+                    - name: PMA_HOST
+                      value: mysql-service
+ #                     name: PMA_PORT
+#                      value: "30123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+        name: madmin-service
+spec:
+        type: NodePort
+        ports:
+         - port: 80
+           targetPort: 80
+           nodePort: 31113
+        selector:
+                app: madmin-pod

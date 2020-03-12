@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: alfresco_dep
+        labels:
+                type: alfresco_dep-v1
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        type: alfresco_dep-v1
+        template:
+                metadata:
+                        name: alfresco_pod
+                        app: alfresco_pod-v1        

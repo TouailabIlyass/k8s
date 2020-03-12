@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: webapp1 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp1
+  template:
+    metadata:
+      labels:
+        app: webapp1
+    spec:
+      containers:
+      - image: ubuntu
+        name: webapp1
+       # ports:
+      #  - containerPort: 80
+        volumeMounts:
+        - mountPath: /root/test
+          name: test-volume
+        #  command: ["/bin/chmod","-R","777", "/data"]
+      volumes:
+      - name: test-volume
+        hostPath:
+          path: /root/k8s
+          type: Directory
